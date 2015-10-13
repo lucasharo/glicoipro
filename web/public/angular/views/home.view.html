@@ -1,0 +1,24 @@
+﻿<div ng-include="'angular/views/menu.html'"></div>
+<section class="content">
+    <div ng-include="'angular/views/flash.html'"></div>
+    <div class="content-wrapper">
+        <section class="content">
+            <fieldset>
+                <legend>Pacientes</legend>
+                <div class="form-group">
+                    <input type="text" placeholder="Buscar..." ng-model="searchText" class="form-control" />
+                </div>
+                <div class="row">
+                    <div class="col-md-4" ng-repeat="i in vm.pacientes  | filter: searchText" style="padding: 1px">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="" ng-click="vm.medicoes(i)"><h2>{{i.nome}}</h2></a></li>
+                            <li class="list-group-item">Data de nascimento: {{i.dtNascimento}}</li>
+                            <li class="list-group-item">Sexo: {{i.sexo}}</li>
+                            <li class="list-group-item">Telefone: {{i.telefone}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </section>
+    </div>
+</section>

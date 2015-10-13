@@ -7,8 +7,16 @@
 	},
 	"dependencies": {
 		"express": "4.12.x",
-		"cfenv": "1.0.x"
-	},
+		"cfenv": "1.0.x",
+      	"express-session":"*",
+      	"body-parser":"*",
+      	"serve-favicon":"*",
+	  	"ejs":"*",
+	  	"emailjs":"*",
+	  	"moment":"*",
+	  	"mongojs":"*",
+      	"mongodb": "*"
+   },
 	"repository": {},
 	"engines": {
 		"node": "0.12.x"

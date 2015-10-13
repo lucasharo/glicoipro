@@ -1,0 +1,29 @@
+<section class="content">
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div ng-include="'angular/views/flash.html'"></div>
+                <div class="col-md-6 col-md-offset-2">
+                    <img src="img/logo.jpg" style="margin-bottom: 20px" />
+                    <form name="form" ng-submit="vm.login()">
+                        <div class="form-group" ng-class="{ 'has-error': form.usuario.$dirty && form.usuario.$error.required }">
+                            <label for="usuario">Username</label>
+                            <input type="text" name="usuario" ng-focus="true" id="usuario" class="form-control" ng-model="vm.usuario" ng-minlength="6" ng-pattern="/^[a-z]*$/" required />
+                            <span ng-show="form.usuario.$dirty && form.usuario.$error.required" class="help-block">Preencha o campo Username</span>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': form.senha.$dirty && form.senha.$error.required }">
+                            <label for="senha">Senha</label>
+                            <input type="password" name="senha" id="senha" class="form-control" ng-model="vm.senha" ng-minlength="6" required />
+                            <span ng-show="form.senha.$dirty && form.senha.$error.required" class="help-block">Preencha o campo Senha</span>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+                            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            <a href="#/cadastro" class="btn btn-link">Cadastrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

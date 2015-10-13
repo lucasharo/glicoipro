@@ -1,0 +1,88 @@
+﻿<div ng-include="'angular/views/menu.html'"></div>
+<section class="content">
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div ng-include="'angular/views/flash.html'"></div>
+                <div class="col-md-7 col-md-offset-2">
+                    <fieldset>
+                        <legend>Perfil</legend>
+                        <form name="form">
+                            <div class="form-group" ng-class="{ 'has-error': form.nome.$dirty && form.nome.$error.required }">
+                                <label for="nome">Nome</label>
+                                <input type="text" name="nome" ng-focus="true" id="nome" class="form-control" ng-model="vm.medico.nome" required />
+                                <span ng-show="form.nome.$dirty && form.nome.$error.required" class="help-block">Preencha o campo Nome</span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': form.crm.$dirty && form.crm.$error.required }">
+                                <label for="crm">CRM</label>
+                                <input type="text" name="crm" id="crm" class="form-control" ng-model="vm.medico.crm" required />
+                                <span ng-show="form.crm.$dirty && form.crm.$error.required" class="help-block">Preencha o campo CRM</span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+                                <label for="email">E-mail</label>
+                                <input type="email" name="email" id="email" class="form-control" ng-model="vm.medico.email" required />
+                                <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Preencha o campo E-mail</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div style="width: 50%; padding-right: 0px" class="col-sm-1" ng-class="{ 'has-error': form.telefone.$dirty && form.telefone.$error.required }">
+                                            <input type="text" name="telefone" class="form-control" ng-model="vm.telefone.num" ui-br-phone-number required />
+                                        </div>
+                                        <div style="width: 34%; padding-right: 0px" class="col-sm-1">
+                                            <select class="form-control" ng-model="vm.telefone.tipo">
+                                                <option value="1">Comercial</option>
+                                                <option value="2">Celular</option>
+                                                <option value="3">Residencial</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button class="btn btn-primary glyphicon glyphicon-plus" ng-click="vm.adicionarCampoTelefone()"></button>
+                                        </div>
+                                    </div>
+                                    <div ng-class="{ 'has-error': form.telefone.$dirty && form.telefone.$error.required }">
+                                        <span ng-show="form.telefone.$dirty && form.telefone.$error.required" class="help-block">Preencha o campo Telefone</span>
+                                    </div>
+                                </div>
+                                <div ng-repeat="telefone in vm.telefones" class="row" style="margin-top: 14px">
+                                    <div style="width: 50%; padding-right: 0px" class="col-sm-1">
+                                        <input type="text" class="form-control" ng-model="telefone.num" ui-br-phone-number />
+                                    </div>
+                                    <div style="width: 34%; padding-right: 0px" class="col-sm-1">
+                                        <select class="form-control" ng-model="telefone.tipo">
+                                            <option value="1">Comercial</option>
+                                            <option value="2">Celular</option>
+                                            <option value="3">Residencial</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <button class="btn btn-danger glyphicon glyphicon-minus" ng-click="vm.excluirCampoTelefone(telefone)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="usuario">Username</label>
+                                <input type="text" name="usuario" id="usuario" class="form-control" value="{{vm.medico.usuario}}" disabled />
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                                <label for="senha">Senha</label>
+                                <input type="password" name="senha" id="senha" class="form-control" ng-model="vm.medico.senha" />
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': form.confirmaSenha.$dirty && form.confirmaSenha.$error.required }">
+                                <label for="confirmaSenha">Confirmar senha</label>
+                                <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control" ng-model="vm.confirmaSenha" />
+                                <span ng-show="vm.senhas" class="help-block">Senhas diferentes</span>
+                            </div>
+                            <div class="form-actions">
+                                <input type="button" ng-click="vm.atualizar()" ng-disabled="form.$invalid" class="btn btn-primary" value="Salvar" />
+                                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                <a href="#/" class="btn btn-link">Cancelar</a>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

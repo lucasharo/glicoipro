@@ -1,0 +1,66 @@
+﻿<div ng-include="'angular/views/menu.html'"></div>
+<section class="content">
+    <div ng-include="'angular/views/flash.html'"></div>
+    <div class="content-wrapper">
+        <section class="content">
+            <fieldset>
+                <legend>Paciente</legend>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h5 style="font-weight: bolder">Nome:</h5> {{vm.paciente.nome}}
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 style="font-weight: bolder">Data de nascimento:</h5> {{vm.paciente.dtNascimento | date: 'dd/MM/yyyy'}}
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 style="font-weight: bolder">Sexo:</h5> {{vm.paciente.sexo}}
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 style="font-weight: bolder">Telefone:</h5> {{vm.paciente.telefone}}
+                    </div>
+                </div>
+            </fieldset>
+            <br />
+            <fieldset>
+                <legend>Período</legend>
+                <form name="form">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group" ng-class="{ 'has-error': form.dtInicio.$dirty && form.dtInicio.$error.required }">
+                                <label for="nome">Início</label>
+                                <p class="input-group">
+                                    <input name="dtInicio" type="date" ng-model="vm.dtInicio" class="form-control" required />
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-default" style="cursor: default"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </span>
+                                </p>
+                                <span ng-show="form.dtInicio.$dirty && form.dtInicio.$error.required" class="help-block">Preencha o campo Início</span>
+                                <span style="color: #a94442" ng-show="vm.erroData">Período inicial maior que final</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group" ng-class="{ 'has-error': form.dtFim.$dirty && form.dtFim.$error.required }">
+                                <label for="crm">Fim</label>
+                                <p class="input-group">
+                                    <input name="dtFim" type="date" ng-model="vm.dtFim" class="form-control" required />
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-default" style="cursor: default"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </span>
+                                </p>
+                                <span ng-show="form.dtFim.$dirty && form.dtFim.$error.required" class="help-block">Preencha o campo Fim</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2" style="margin-top: 25px">
+                            <input type="button" ng-click="vm.grafico()" ng-disabled="form.$invalid" class="btn btn-primary" value="Carregar gráfico" />
+                            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+            <br />
+            <canvas id="line" class="chart chart-line" chart-data="vm.medicoes"
+                    chart-labels="vm.labels" chart-legend="true" chart-series="vm.series"
+                    chart-click="vm.onClick" height="70"></canvas>
+        </section>
+    </div>
+</section>
